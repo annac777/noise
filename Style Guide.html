@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Noise Reporting Design System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'MiSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Medium';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Demibold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Demibold.ttf');
+        }
+
+        :root {
+            --primary-blue: #0052FF;
+            --primary-dark: #111827;
+            --secondary-teal: #00B8D9;
+            --secondary-purple: #7C3AED;
+            --text-main: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --bg-page: #FFFFFF;
+            --bg-gray: #F3F4F6;
+            --grid-line: #E5E7EB;
+            
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            width: 1920px;
+            margin: 0 auto;
+            background-color: var(--bg-page);
+            font-family: 'MiSans-Regular', sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            padding: 80px 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        /* Header Section */
+        header {
+            border-bottom: 2px solid var(--grid-line);
+            padding-bottom: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .brand-title {
+            font-family: 'MiSans-Bold';
+            font-size: 64px;
+            line-height: 1.1;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+        }
+
+        .brand-subtitle {
+            font-family: 'MiSans-Medium';
+            font-size: 24px;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+        }
+
+        .meta-info {
+            text-align: right;
+        }
+
+        .version-badge {
+            background: var(--bg-gray);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'MiSans-Medium';
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-family: 'MiSans-Bold';
+            font-size: 32px;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 32px;
+            background: var(--primary-blue);
+            border-radius: 2px;
+        }
+
+        /* Typography Section */
+        .typography-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+        }
+
+        .type-specimen-large {
+            font-size: 280px;
+            font-family: 'MiSans-Bold';
+            line-height: 0.8;
+            color: var(--primary-dark);
+            opacity: 0.05;
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+        }
+
+        .font-card {
+            position: relative;
+        }
+
+        .font-name {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-family: 'MiSans-Medium';
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--grid-line);
+            padding-bottom: 10px;
+        }
+
+        .type-row {
+            margin-bottom: 40px;
+        }
+
+        .type-label {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-family: 'MiSans-Medium';
+        }
+
+        .display-h1 { font-family: 'MiSans-Bold'; font-size: 56px; line-height: 1.2; letter-spacing: -1px; }
+        .display-h2 { font-family: 'MiSans-Bold'; font-size: 40px; line-height: 1.25; letter-spacing: -0.5px; }
+        .display-h3 { font-family: 'MiSans-Demibold'; font-size: 32px; line-height: 1.3; }
+        .display-body { font-family: 'MiSans-Regular'; font-size: 18px; line-height: 1.6; color: var(--text-secondary); }
+
+        /* Color Palette Section */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+
+        .color-group-title {
+            grid-column: 1 / -1;
+            font-size: 18px;
+            font-family: 'MiSans-Demibold';
+            color: var(--text-main);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .swatch-card {
+            background: white;
+            border: 1px solid var(--grid-line);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+
+        .swatch-color {
+            height: 140px;
+            width: 100%;
+        }
+
+        .swatch-info {
+            padding: 16px;
+        }
+
+        .hex-code {
+            font-family: 'MiSans-Bold';
+            font-size: 18px;
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .color-name {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Spacing System */
+        .spacing-container {
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 60px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-end;
+            border: 1px dashed var(--text-light);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .space-block {
+            background: rgba(0, 82, 255, 0.2);
+            border: 1px solid var(--primary-blue);
+            width: 80px;
+            position: relative;
+        }
+        
+        .space-block::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: var(--primary-blue);
+            font-family: 'MiSans-Bold';
+        }
+
+        .space-label {
+            font-family: 'MiSans-Medium';
+            font-size: 16px;
+            color: var(--text-main);
+        }
+
+        .space-value {
+            font-family: 'MiSans-Regular';
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Chart Colors */
+        .chart-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .gradient-box {
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--grid-line);
+        }
+
+        .gradient-bar {
+            height: 60px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #34D399 0%, #FBBF24 50%, #EF4444 100%);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .gradient-labels {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'MiSans-Medium';
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .chart-preview {
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--grid-line);
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding-bottom: 40px;
+            position: relative;
+        }
+
+        .chart-bar {
+            width: 40px;
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            transition: height 0.3s;
+        }
+
+        .chart-bar span {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-family: 'MiSans-Bold';
+            color: var(--text-secondary);
+        }
+
+        .chart-grid-lines {
+            position: absolute;
+            left: 30px;
+            right: 30px;
+            top: 30px;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-line {
+            width: 100%;
+            height: 1px;
+            background: var(--grid-line);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div>
+                <h1 class="brand-title">Style Guide</h1>
+                <p class="brand-subtitle">New York Noise Reporting Project</p>
+            </div>
+            <div class="meta-info">
+                <div class="version-badge"><i class="ri-git-commit-line"></i> Version 2.4.0</div>
+                <div style="margin-top: 8px; color: var(--text-light); font-size: 14px;">Updated: Oct 24, 2023</div>
+            </div>
+        </header>
+
+        <!-- Typography -->
+        <section>
+            <h2 class="section-title">Typography</h2>
+            <div class="typography-grid">
+                <!-- Headline Font -->
+                <div class="font-card">
+                    <div class="font-name">Headline Font - MiSans Bold</div>
+                    <div class="type-row">
+                        <div class="type-label">H1 - 56px / 1.2</div>
+                        <div class="display-h1">Noise Complaints<br>Dashboard</div>
+                    </div>
+                    <div class="type-row">
+                        <div class="type-label">H2 - 40px / 1.25</div>
+                        <div class="display-h2">Recent Reports &<br>Analytics Overview</div>
+                    </div>
+                    <div class="type-row">
+                        <div class="type-label">H3 - 32px / 1.3</div>
+                        <div class="display-h3">District Visualization Map</div>
+                    </div>
+                </div>
+
+                <!-- Body Font -->
+                <div class="font-card">
+                    <div class="font-name">Body Font - MiSans Regular</div>
+                    <div class="type-row">
+                        <div class="type-label">Body Text - 18px / 1.6</div>
+                        <div class="display-body" style="max-width: 600px;">
+                            The Noise Reporting Project aims to provide real-time data visualization of auditory disturbances across the five boroughs. Using advanced sensor networks and citizen reporting, we aggregate decibel levels to generate actionable insights for city planning.
+                        </div>
+                    </div>
+                    <div class="type-row">
+                        <div class="type-label">Alphabet</div>
+                        <div class="display-body" style="font-size: 20px; letter-spacing: 2px;">
+                            ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                            abcdefghijklmnopqrstuvwxyz<br>
+                            0123456789 (!@#$%^&*)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Color Palette -->
+        <section>
+            <h2 class="section-title">Color Palette</h2>
+            <div class="color-grid">
+                
+                <div class="color-group-title">Primary Colors</div>
+                
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: var(--primary-blue);"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#0052FF</span>
+                        <span class="color-name">Electric Blue</span>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: var(--primary-dark);"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#111827</span>
+                        <span class="color-name">Midnight Navy</span>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: #FFFFFF; border-bottom: 1px solid #eee;"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#FFFFFF</span>
+                        <span class="color-name">Pure White</span>
+                    </div>
+                </div>
+
+                <div class="color-group-title" style="margin-top: 40px; grid-column: 1/-1;">Functional & Text Colors</div>
+
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: var(--text-main);"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#1F2937</span>
+                        <span class="color-name">Text Primary</span>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: var(--text-secondary);"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#6B7280</span>
+                        <span class="color-name">Text Secondary</span>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color" style="background: var(--bg-gray);"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#F3F4F6</span>
+                        <span class="color-name">Surface Gray</span>
+                    </div>
+                </div>
+                 <div class="swatch-card">
+                    <div class="swatch-color" style="background: var(--grid-line);"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#E5E7EB</span>
+                        <span class="color-name">Grid Line</span>
+                    </div>
+                </div>
+                 <div class="swatch-card">
+                    <div class="swatch-color" style="background: #EF4444;"></div>
+                    <div class="swatch-info">
+                        <span class="hex-code">#EF4444</span>
+                        <span class="color-name">Alert Red</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing System -->
+        <section>
+            <h2 class="section-title">Spacing System</h2>
+            <div class="spacing-container">
+                <div class="spacing-item">
+                    <div class="space-block" style="height: 8px;"></div>
+                    <div class="space-label">XS</div>
+                    <div class="space-value">8px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="space-block" style="height: 16px;"></div>
+                    <div class="space-label">SM</div>
+                    <div class="space-value">16px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="space-block" style="height: 24px;"></div>
+                    <div class="space-label">MD</div>
+                    <div class="space-value">24px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="space-block" style="height: 32px;"></div>
+                    <div class="space-label">LG</div>
+                    <div class="space-value">32px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="space-block" style="height: 48px;"></div>
+                    <div class="space-label">XL</div>
+                    <div class="space-value">48px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="space-block" style="height: 64px;"></div>
+                    <div class="space-label">2XL</div>
+                    <div class="space-value">64px</div>
+                </div>
+                <div style="margin-left: auto; font-family: 'MiSans-Regular'; color: var(--text-secondary); max-width: 300px;">
+                    <strong style="color: var(--primary-dark);">8pt Grid System</strong><br>
+                    All spacing measurements are multiples of 8 to ensure vertical rhythm and alignment across different viewports.
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Color Scheme -->
+        <section>
+            <h2 class="section-title">Data Visualization Colors</h2>
+            <div class="chart-layout">
+                <div>
+                    <h3 style="font-family: 'MiSans-Medium'; margin-bottom: 20px;">Noise Intensity Gradient</h3>
+                    <div class="gradient-box">
+                        <div class="gradient-bar"></div>
+                        <div class="gradient-labels">
+                            <span>Low Noise (Acceptable)</span>
+                            <span>Moderate</span>
+                            <span>High Noise (Critical)</span>
+                        </div>
+                        <div style="margin-top: 20px; display: flex; gap: 10px;">
+                            <div style="flex: 1; text-align: center;">
+                                <div style="width: 20px; height: 20px; background: #34D399; border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <span class="hex-code" style="font-size: 14px;">#34D399</span>
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="width: 20px; height: 20px; background: #FBBF24; border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <span class="hex-code" style="font-size: 14px;">#FBBF24</span>
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="width: 20px; height: 20px; background: #EF4444; border-radius: 50%; margin: 0 auto 8px;"></div>
+                                <span class="hex-code" style="font-size: 14px;">#EF4444</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="font-family: 'MiSans-Medium'; margin-bottom: 20px;">Chart Implementation Example</h3>
+                    <div class="chart-preview">
+                        <div class="chart-grid-lines">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
+                        <div class="chart-bar" style="height: 40%; background: #34D399;"><span>45</span></div>
+                        <div class="chart-bar" style="height: 65%; background: #FBBF24;"><span>65</span></div>
+                        <div class="chart-bar" style="height: 50%; background: #FBBF24;"><span>50</span></div>
+                        <div class="chart-bar" style="height: 85%; background: #EF4444;"><span>85</span></div>
+                        <div class="chart-bar" style="height: 30%; background: #34D399;"><span>30</span></div>
+                        <div class="chart-bar" style="height: 70%; background: #EF4444;"><span>70</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="height: 40px;"></div>
+    </div>
+
+</body>
+</html>

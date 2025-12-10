@@ -1,0 +1,6 @@
+*.csv
+*.sas7bdat
+.DS_Store
+__pycache__/
+*.pdf
+
