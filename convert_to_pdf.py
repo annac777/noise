@@ -24,7 +24,7 @@ def convert_html_to_pdf(input_file, output_file):
         # format='A4' or width/height can be specified. 
         # print_background=True ensures colors/images are printed.
         page.pdf(
-            path=output_path, 
+            path=output_file, 
             format='A4', 
             print_background=True, 
             margin={'top': '1cm', 'bottom': '1cm', 'left': '1cm', 'right': '1cm'}
