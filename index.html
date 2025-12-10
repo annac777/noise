@@ -420,8 +420,17 @@
         <div class="split-visual">
             <div class="sticky-map-container">
                 <iframe class="map-frame"
-                    src="https://studio.foursquare.com/map/public/1bf3218a-349c-4a92-961a-2c6f29d00309"
-                    frameborder="0"></iframe>
+                    src="https://studio.foursquare.com/map/public/1bf3218a-349c-4a92-961a-2c6f29d00309" frameborder="0"
+                    style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 关键逻辑：宽度设为 100% + 侧边栏宽度(约300px) */
+            width: calc(100% + 320px); 
+            height: 100%;
+            /* 关键逻辑：向左移动，把侧边栏藏到屏幕外面去 */
+            margin-left: -320px; 
+        "></iframe>
             </div>
         </div>
     </div>
@@ -443,8 +452,17 @@
         <div class="split-visual">
             <div class="sticky-map-container">
                 <iframe class="map-frame"
-                    src="https://studio.foursquare.com/map/public/5e611994-28e3-4aee-a358-a78cbeb6e6ad"
-                    frameborder="0"></iframe>
+                    src="https://studio.foursquare.com/map/public/5e611994-28e3-4aee-a358-a78cbeb6e6ad" frameborder="0"
+                    style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 关键逻辑：宽度设为 100% + 侧边栏宽度(约300px) */
+            width: calc(100% + 320px); 
+            height: 100%;
+            /* 关键逻辑：向左移动，把侧边栏藏到屏幕外面去 */
+            margin-left: -320px; 
+        "></iframe>
             </div>
         </div>
     </div>
