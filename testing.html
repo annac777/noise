@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Loud Is New York City, Really?</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- Core Variables --- */
+        :root {
+            --primary-red: #D6453D;
+            --text-dark: #1A1A1A;
+            --text-gray: #444444;
+            --bg-color: #FFFFFF;
+            --line-color: #DDDDDD;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- Typography --- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 1.8rem;
+        }
+
+        /* Fix for list padding in this specific context */
+        .container ul {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 1.8rem;
+            padding-left: 20px;
+        }
+
+        .container ul li {
+            margin-bottom: 10px;
+        }
+
+
+        .section-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--primary-red);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* --- Hero Section --- */
+        .fullscreen-slide {
+            height: 100vh;
+            width: 100%;
+            background-color: #111;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-1 {
+            background-image: url('hero_bg_1.jpg');
+        }
+
+        .slide-2 {
+            background-image: url('hero_bg_2.jpg');
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .byline {
+            background: var(--primary-red);
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* --- Layout Standard --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 90px 20px;
+        }
+
+        .intro-text {
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+        }
+
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            float: left;
+            margin-right: 12px;
+            line-height: 0.8;
+            color: var(--primary-red);
+        }
+
+        .figure-block {
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .figure-block img {
+            max-width: 85%;
+            height: auto;
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            display: inline-block;
+        }
+
+        /* --- Split Section (Maps) --- */
+        .split-section {
+            display: flex;
+            min-height: 100vh;
+            border-top: 1px solid var(--line-color);
+            border-bottom: 1px solid var(--line-color);
+            background: white;
+        }
+
+        .split-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .split-text {
+            width: 40%;
+            padding: 60px 50px;
+            background: #fff;
+            z-index: 10;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-section.reverse .split-text {
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .split-visual {
+            width: 60%;
+            position: relative;
+            background: #fff;
+        }
+
+        .sticky-map-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- Captions --- */
+        .caption {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: left;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            border-left: 3px solid var(--primary-red);
+            padding-left: 15px;
+        }
+
+        .caption strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* --- 🎵 Simple Audio Card (Intro) --- */
+        .audio-card {
+            background-color: #F9F9F9;
+            border-left: 4px solid var(--primary-red);
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+
+        .audio-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .audio-description {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            outline: none;
+        }
+
+        /* Restored native control style */
+
+
+        /* --- 🎛️ Component 2: Interactive Mixer (Middle) --- */
+        .mixer-wrapper {
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            margin: 60px auto;
+            /* Vertical spacing */
+        }
+
+        .mixer-header {
+            width: 100%;
+            height: 350px;
+            background-image: url('Background1.jpg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .mixer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1;
+            font-style: italic;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .mixer-subtitle {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .controls-area {
+            padding: 40px;
+            background: #FAFAFA;
+        }
+
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .sound-btn {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            height: 110px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sound-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-color: #bbb;
+        }
+
+        .sound-btn.playing {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+            color: white;
+            box-shadow: 0 5px 20px rgba(214, 69, 61, 0.4);
+        }
+
+        .sound-btn.playing::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: pulse 1.5s infinite;
+        }
+
+        .btn-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .btn-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .master-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+
+        .action-btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .btn-chaos {
+            background: #111;
+            color: white;
+        }
+
+        .btn-stop {
+            background: white;
+            border: 2px solid #ddd;
+            color: #555;
+        }
+
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0.4;
+            }
+        }
+
+        /* --- Footer & Quote --- */
+        blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            font-style: italic;
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+            line-height: 1.4;
+            color: var(--primary-red);
+            text-align: center;
+        }
+
+        blockquote span {
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+
+        footer {
+            background: #F9F9F9;
+            padding: 80px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--line-color);
+        }
+
+        .ref-header {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .ref-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .reference-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+
+        .reference-list li {
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .reference-list strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .reference-list a {
+            color: var(--primary-red);
+            text-decoration: none;
+            opacity: 0.8;
+            word-break: break-all;
+        }
+
+        .reference-list a:hover {
+            text-decoration: underline;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .split-section,
+            .split-section.reverse {
+                flex-direction: column;
+            }
+
+            .split-text {
+                width: 100%;
+                padding: 40px 20px;
+                box-shadow: none;
+            }
+
+            .split-visual {
+                width: 100%;
+                height: 500px;
+            }
+
+            .sticky-map-container {
+                position: relative;
+                height: 100%;
+            }
+
+            .figure-block img {
+                max-width: 100% !important;
+            }
+
+            blockquote {
+                font-size: 1.6rem;
+            }
+
+            .sound-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mixer-header {
+                height: 250px;
+                background-size: cover;
+            }
+
+            .mixer-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fullscreen-slide slide-1">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>How Loud Is<br>New York City?</h1>
+            <div class="hero-subtitle">Where noise comes from, when it peaks, and what it means for the people who live
+                inside it.</div>
+            <div class="byline">By Anna Chen, Information Design 2025</div>
+        </div>
+    </div>
+
+    <div class="fullscreen-slide slide-2">
+    </div>
+
+    <div class="container">
+        <div class="intro-text">
+            <p class="drop-cap">New York is known as “the city that never sleeps,” not because of its lights, but
+                because of its sound. Even if every screen and billboard went dark, the city would remain awake: trains
+                screeching into stations, cars rolling over bridges, sirens slicing through traffic, garbage trucks
+                beeping in the dark at 3 a.m.</p>
+            <p>Noise here is not an interruption — it is a constant environmental condition.</p>
+
+            <div class="audio-card">
+                <div class="audio-title">🔊 Listen: The Wall Street Soundscape</div>
+                <div class="audio-description">
+                    New York's soundscape is rarely defined by a single, sharp event, but by the high-density mix of
+                    daily sources.
+                    **This is a field recording from a typical weekday near Wall Street:** A constant layer of distant
+                    subway rumble,
+                    idling car engines, general traffic, and overlapping pedestrian conversations—the permanent
+                    **Ambient Hum** that
+                    New Yorkers live inside every day.
+                </div>
+                <audio id="ambience-audio" controls>
+                    <source src="WallStreet.WAV" type="audio/mpeg">
+                    Your browser does support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top: 0;">
+        <span class="section-number">01 — The Baseline</span>
+        <h2>New York’s Default Volume</h2>
+        <p>The World Health Organization recommends that night-time noise outside a bedroom window stay below 40 dB. Yet
+            many neighborhoods in New York remain between 60 and 70 dB throughout the day and night.</p>
+        <p>When we visualize week-long average sound levels from dozens of monitoring sites, a simple but harsh reality
+            emerges: <strong>New York almost never drops below 60 dB.</strong></p>
+
+        <div class="figure-block">
+            <img src="1.png" alt="Graph 1">
+            <div class="caption">
+                <strong>Graph 1:</strong> NYC Temporal Noise Profile vs. Health Thresholds. Even the quietest times
+                exceed the quality of life line.
+            </div>
+        </div>
+
+        <p>Ideally, a night-time window reading should be about 40 dB, yet residential streets often exceed that by 20
+            to 30 dB. Even when the city feels “normal,” the body is quietly under strain.</p>
+    </div>
+
+    <div class="split-section reverse">
+        <div class="split-text">
+            <div>
+                <span class="section-number">02 — The Hotspots</span>
+                <h2>Where Complaints Concentrate</h2>
+                <p>But these monitoring sites are only the surface. When we map the locations of noise complaints
+                    citywide, a more human version of the soundscape reveals itself.</p>
+                <p>The density map shows where New Yorkers filed the most noise complaints in 2024. The most intense
+                    hotspots — deep reds and oranges — cluster around Manhattan’s West Side, Midtown, and the South
+                    Bronx.</p>
+            </div>
+        </div>
+        <div class="split-visual">
+            <div class="sticky-map-container">
+                <iframe class="map-frame"
+                    src="https://studio.foursquare.com/map/public/1bf3218a-349c-4a92-961a-2c6f29d00309"
+                    frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="split-section">
+        <div class="split-text">
+            <div>
+                <span class="section-number">03 — The Texture</span>
+                <h2>Categorizing the Chaos</h2>
+                <p>Once categorized, several patterns stand out:</p>
+                <p><strong>Helicopter noise</strong> spikes dramatically around West 67th–75th Street, aligned with
+                    Hudson River flight paths.</p>
+                <p><strong>Residential noise</strong> is common in older buildings with poor insulation.</p>
+                <p><strong>Mechanical noise</strong> — HVAC systems, idling trucks, generators — affects mixed-use
+                    areas.</p>
+                <p>But complaints reflect what people find unbearable, not what is objectively loudest.</p>
+            </div>
+        </div>
+        <div class="split-visual">
+            <div class="sticky-map-container">
+                <iframe class="map-frame"
+                    src="https://studio.foursquare.com/map/public/5e611994-28e3-4aee-a358-a78cbeb6e6ad"
+                    frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <span class="section-number">04 — The Commute</span>
+        <h2>The City’s Loudest Daily Noise</h2>
+        <p>OSHA sets an 8-hour workplace noise limit at 85 dBA — but subway noise is not about averages. Peak levels on
+            platforms frequently reach <strong>100–120 dBA</strong>, a range universally recognized as capable of
+            causing
+            immediate auditory damage.</p>
+
+        <div class="figure-block">
+            <img src="4.png" alt="Transit Noise Peaks Comparison" style="max-width: 70%;">
+            <div class="caption">
+                <strong>Fig 4:</strong> Maximum Noise Peaks Comparison. MTA subway platforms frequently reach peak
+                levels that exceed immediate risk thresholds.
+            </div>
+        </div>
+
+        <p>Transit isn’t just loud — it is one of the city’s most consistent and unavoidable sources of high-decibel
+            exposure.</p>
+    </div>
+
+    <div class="container">
+        <span class="section-number">05 — The Accumulation</span>
+        <h2>Build the Noise: A Layered Soundscape</h2>
+        <p>The sounds of New York rarely happen in isolation. The following mixer allows you to combine the elements you
+            see on the map and the sources you experience daily—from sirens and subway passes to general traffic—to
+            illustrate the density of the auditory environment.</p>
+
+        <div class="mixer-wrapper">
+            <div class="mixer-header">
+                <h2 class="mixer-title">Layer the Chaos</h2>
+                <div class="mixer-subtitle">Interactive NYC Soundscape</div>
+            </div>
+
+            <div class="controls-area">
+                <div class="sound-grid">
+                    <div class="sound-btn" onclick="toggleSound('road', this)">
+                        <span class="btn-icon">🚗</span>
+                        <span class="btn-label">Traffic</span>
+                        <audio id="road" loop src="Road.wav"></audio>
+                    </div>
+                    <div class="sound-btn" onclick="toggleSound('subway', this)">
+                        <span class="btn-icon">🚆</span>
+                        <span class="btn-label">Subway Pass</span>
+                        <audio id="subway" loop src="Subway.wav"></audio>
+                    </div>
+                    <div class="sound-btn" onclick="toggleSound('subwayIn', this)">
+                        <span class="btn-icon">🚇</span>
+                        <span class="btn-label">Inside Train</span>
+                        <audio id="subwayIn" loop src="SubwayInside.WAV"></audio>
+                    </div>
+                    <div class="sound-btn" onclick="toggleSound('engine', this)">
+                        <span class="btn-icon">🚌</span>
+                        <span class="btn-label">Bus Idle</span>
+                        <audio id="engine" loop src="Engine.wav"></audio>
+                    </div>
+
+                    <div class="sound-btn" onclick="toggleSound('siren', this)">
+                        <span class="btn-icon">🚓</span>
+                        <span class="btn-label">Police</span>
+                        <audio id="siren" loop src="Siren.wav"></audio>
+                    </div>
+                    <div class="sound-btn" onclick="toggleSound('ambulance', this)">
+                        <span class="btn-icon">🚑</span>
+                        <span class="btn-label">Ambulance</span>
+                        <audio id="ambulance" loop src="Ambulance.wav"></audio>
+                    </div>
+                    <div class="sound-btn" onclick="toggleSound('horn', this)">
+                        <span class="btn-icon">📯</span>
+                        <span class="btn-label">Honk</span>
+                        <audio id="horn" src="Carhorn.wav"></audio>
+                    </div>
+                    <div class="sound-btn" onclick="toggleSound('drill', this)">
+                        <span class="btn-icon">🚧</span>
+                        <span class="btn-label">Drilling</span>
+                        <audio id="drill" loop src="Reconstruction.wav"></audio>
+                    </div>
+                </div>
+
+                <div class="master-controls">
+                    <button class="action-btn btn-chaos" onclick="playAll()">🔥 Max Chaos</button>
+                    <button class="action-btn btn-stop" onclick="stopAll()">Silence</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <span class="section-number">06 — The Exposure</span>
+        <h2>No Alternative Route</h2>
+        <p>The data shows that thousands of New Yorkers are exposed to loud transit noise five to seven days a week,
+            meaning many are daily commuters.</p>
+
+        <div class="figure-block">
+            <img src="5.png" alt="Weekly Subway Noise Exposure" style="max-width: 90%;">
+            <div class="caption">
+                <strong>Fig 5:</strong> Weekly Frequency of Exposure. Thousands of New Yorkers are exposed to loud
+                subway or bus noise 7 days a week.
+            </div>
+        </div>
+
+        <p>On top of that, about 9.5% of men and 4.0% of women experience more than four hours of loud noise at work
+            each day. This gap largely reflects occupational patterns.</p>
+
+        <div class="figure-block">
+            <img src="6.png" alt="Occupational Noise Exposure" style="max-width: 90%;">
+            <div class="caption">
+                <strong>Fig 6:</strong> Occupational Noise Exposure by Gender.
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <span class="section-number">07 — The Coping</span>
+        <h2>Headphones as Defense</h2>
+        <p>Noise affects more than health; it reshapes behavior. Younger New Yorkers, especially those aged 18–24, rely
+            heavily on headphones as a protective response: 42% wear headphones daily.</p>
+
+        <div class="figure-block">
+            <img src="7.png" alt="Headphone Use by Age Group" style="max-width: 100%;">
+            <div class="caption">
+                <strong>Fig 7:</strong> Headphone Usage by Age. A forced coping mechanism for the younger generation.
+            </div>
+        </div>
+
+        <p>What begins as a buffer quickly becomes another source of auditory strain — internal noise layered on top of
+            external noise.</p>
+    </div>
+
+    <div class="container">
+        <span class="section-number">08 — The Silent Threat</span>
+        <h2>The Unseen Cost of Chronic Exposure</h2>
+        <p>The impact of noise stretches far beyond temporary discomfort. Today, environmental noise is recognized as a
+            genuine public health concern. Even levels that feel “normal” in New York—around 60–70 dBA—can activate the
+            body’s stress response throughout the day.</p>
+
+        <p>During waking hours, this contributes to reduced concentration, irritability, and elevated stress hormones.
+            At night, recurring noise spikes disrupt deep sleep, leading to fragmented rest and long-term sleep
+            deprivation.</p>
+
+        <p>Over years, these effects accumulate. Research links chronic noise exposure to:</p>
+        <ul>
+            <li>Higher blood pressure and increased hypertension risk</li>
+            <li>Greater likelihood of heart attacks and strokes</li>
+            <li>Elevated cortisol contributing to anxiety and mental fatigue</li>
+        </ul>
+
+        <p>For many New Yorkers, coping strategies—noise-canceling headphones, closing windows, rearranging rooms—are
+            practical, but they do not fully address the underlying issue.</p>
+    </div>
+
+    <div class="container">
+        <span class="section-number">09 — The Future</span>
+        <h2>A Citywide Challenge, A Shared Experience</h2>
+        <p>New York’s soundscape is shaped by infrastructure: subways, sanitation routes, helicopters, aging buildings,
+            and dense traffic patterns. These layers create an environment where noise isn’t just an occasional event—it
+            is part of everyday life for millions.</p>
+        <p>Understanding this system does not solve it overnight, but it gives us a clearer foundation to imagine what a
+            healthier sound environment could look like:</p>
+
+        <ul>
+            <li>Quieter transit technologies</li>
+            <li>Better building insulation</li>
+            <li>Smarter routing of aircraft and trucks</li>
+            <li>Equitable enforcement of noise codes</li>
+            <li>Urban planning that considers acoustic health as seriously as air and light</li>
+        </ul>
+
+        <h3
+            style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--text-dark); margin-bottom: 1rem; font-size: 1.5rem;">
+            Why This Matters</h3>
+        <p>Most importantly, raising awareness is a first step. Noise affects concentration, sleep, mental well-being,
+            and long-term health, yet it often remains invisible because we adapt to it.</p>
+        <p>This project is not a solution by itself—but it is an attempt to make the issue visible, audible, and easier
+            to talk about.</p>
+
+        <p style="font-size: 1.25rem; font-weight: 600; text-align: center; color: var(--primary-red);">
+            If more of us understand how the city sounds, we can better advocate for how we want the city to feel.
+        </p>
+
+        <div style="height: 40px;"></div>
+    </div>
+
+    <footer>
+        <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <p
+                style="text-align: center; margin-bottom: 50px; color: var(--text-dark); font-weight: 700; font-family: 'Playfair Display', serif; font-size: 1.5rem;">
+                References & Data Sources</p>
+
+            <ul class="reference-list">
+
+                <div class="ref-header">🗽 NYC-Specific Noise, 311, and Transit</div>
+
+                <li><strong>Kheirbek, Iyad, et al. (2014)</strong> “Spatial Variation in Environmental Noise and Air
+                    Pollution in New York City.” <em>Journal of Urban Health</em>. <a
+                        href="https://doi.org/10.1007/s11524-013-9857-0" target="_blank">View Source</a></li>
+                <li><strong>Neitzel, Richard, et al. (2009)</strong> “Noise Levels Associated with New York City’s Mass
+                    Transit Systems.” <em>American Journal of Public Health</em>. <a
+                        href="https://doi.org/10.2105/AJPH.2008.138297" target="_blank">View Source</a></li>
+                <li><strong>NYC Dept. of Environmental Protection</strong>. “NYC Noise Code.” <a
+                        href="https://www.nyc.gov/site/dep/environment/noise-code.page" target="_blank">View Source</a>
+                </li>
+                <li><strong>Teoh, Tanaya, and Carolyn Olson (2018)</strong>. <em>Effect of Noise and Light on Sleep in
+                        New York City</em>. <a href="https://www.nyc.gov/assets/doh/downloads/pdf/epi/databrief105.pdf"
+                        target="_blank">View PDF</a></li>
+                <li><strong>Rodriguez-Lopez, Jesica (2014)</strong>. <em>Ambient Noise Disruption in New York City</em>.
+                    <a href="https://www.nyc.gov/assets/doh/downloads/pdf/epi/databrief45.pdf" target="_blank">View
+                        PDF</a>
+                </li>
+                <li><strong>Office of the NYS Comptroller (2018)</strong>. <em>Noise in New York City
+                        Neighborhoods</em>. <a
+                        href="https://www.osc.ny.gov/files/reports/special-topics/pdf/health-noise-in-nyc-2018.pdf"
+                        target="_blank">View PDF</a></li>
+                <li><strong>Office of the NYS Comptroller (2025)</strong>. <em>NYC311 Monitoring Tool</em>. <a
+                        href="https://www.osc.ny.gov/files/reports/pdf/report-3-2026.pdf" target="_blank">View PDF</a>
+                </li>
+                <li><strong>FOX 5 New York (2025)</strong>. “Noise Tops NYC’s 311 Complaints List in 2024.” <a
+                        href="https://www.fox5ny.com/news/noise-tops-nycs-311-complaints-list-2024" target="_blank">View
+                        Source</a></li>
+                <li><strong>Campanile, Carl, and Reuven Fenton (2025)</strong>. “NYC’s Hidden ‘Noise Cameras’ Issue
+                    $1.7M in Fines.” <em>New York Post</em>. <a
+                        href="https://nypost.com/2025/09/15/us-news/nycs-hidden-noise-cameras-issue-1-7m-in-fines/"
+                        target="_blank">View Source</a></li>
+                <li><strong>MTA New York City Transit (2023)</strong>. <em>New York City Transit Noise Reduction
+                        Report</em>. <a href="https://www.mta.info/document/138061" target="_blank">View Document</a>
+                </li>
+                <li><strong>Hearing Health Foundation (2018)</strong>. “A Fast Track to Hearing Damage.” <a
+                        href="https://hearinghealthfoundation.org/blogs/a-fast-track-to-hearing-damage"
+                        target="_blank">View Source</a></li>
+                <li><strong>NYC DOHMH</strong>. “Noise.” NYC Health. <a
+                        href="https://www.nyc.gov/site/doh/health/health-topics/noise.page" target="_blank">View
+                        Source</a></li>
+
+                <div class="ref-header">🌍 Global Guidelines & Health Effects</div>
+
+                <li><strong>U.S. EPA (1974)</strong>. <em>Information on Levels of Environmental Noise Requisite...</em>
+                    <a href="https://nepis.epa.gov/Exe/ZyNET.exe/2000L3LN.TXT" target="_blank">View Document</a>
+                </li>
+                <li><strong>World Health Organization (2009)</strong>. <em>Night Noise Guidelines for Europe</em>. <a
+                        href="https://www.euro.who.int/__data/assets/pdf_file/0017/43316/E92845.pdf"
+                        target="_blank">View PDF</a></li>
+                <li><strong>World Health Organization (2018)</strong>. <em>Environmental Noise Guidelines for the
+                        European Region</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5877064/"
+                        target="_blank">View Summary</a></li>
+                <li><strong>European Environment Agency (2025)</strong>. <em>Environmental Noise in Europe 2025</em>. <a
+                        href="https://www.eea.europa.eu/en/analysis/publications/environmental-noise-in-europe-2025"
+                        target="_blank">View Report</a></li>
+                <li><strong>European Society of Cardiology (2025)</strong>. “New EEA 2025 Noise Report Confirms...” <a
+                        href="https://www.escardio.org/The-ESC/Press-Office/Press-releases/new-eea-2025-noise-report-confirms-environmental-noise-is-a-medical-emergency"
+                        target="_blank">View Press Release</a></li>
+                <li><strong>Münzel, Thomas, et al. (2018)</strong>. “Environmental Noise and the Cardiovascular System.”
+                    <a href="https://www.jacc.org/doi/10.1016/j.jacc.2017.12.015" target="_blank">View Source</a>
+                </li>
+                <li><strong>Basner, Mathias, et al. (2019)</strong>. “WHO Environmental Noise Guidelines... A Systematic
+                    Review.” <a href="https://www.mdpi.com/1660-4601/16/18/3256" target="_blank">View Source</a></li>
+
+                <div class="ref-header">🧠 Noise, Mental Health, and Behavior</div>
+
+                <li><strong>Hahad, Omar, et al. (2025)</strong>. “Noise and Mental Health...” <em>Journal of Exposure
+                        Science</em>. <a href="https://www.nature.com/articles/s41370-024-00642-5" target="_blank">View
+                        Source</a></li>
+
+                <div class="ref-header">🐦 Urban Ecology and Soundscapes</div>
+
+                <li><strong>Slabbekoorn, Hans, and Margriet Peet (2003)</strong>. “Ecology: Birds Sing at a Higher Pitch
+                    in Urban Noise.” <a href="https://www.nature.com/articles/424267a" target="_blank">View Source</a>
+                </li>
+
+                <div class="ref-header">🎧 Data and Sound Taxonomy</div>
+
+                <li><strong>Salamon, Justin, et al.</strong>. <em>UrbanSound8K: A Dataset of Urban Sound
+                        Recordings</em>.
+                    <a href="https://urbansounddataset.weebly.com/urbansound8k.html" target="_blank">View Dataset</a>
+                </li>
+            </ul>
+            <p style="margin-top: 60px; text-align: center; font-size: 0.8rem; color: #999;">© 2025 Anna Chen.
+                Information Design.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Interactive Mixer Functions ---
+        function toggleSound(id, btn) {
+            var audio = document.getElementById(id);
+            // Stop ambience audio if playing to prevent interference
+            stopAmbience();
+
+            if (audio.paused) {
+                audio.play();
+                audio.volume = 0.6;
+                btn.classList.add('playing');
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+                btn.classList.remove('playing');
+            }
+        }
+
+        function stopAll() {
+            document.querySelectorAll('.mixer-wrapper audio').forEach(a => {
+                a.pause();
+                a.currentTime = 0;
+            });
+            document.querySelectorAll('.sound-btn').forEach(b => b.classList.remove('playing'));
+            stopAmbience(); // Also stop ambience if the main stop button is hit
+        }
+
+        function playAll() {
+            document.querySelectorAll('.mixer-wrapper audio').forEach(a => {
+                a.play();
+                a.volume = 0.5;
+            });
+            document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('playing'));
+            stopAmbience(); // Also stop ambience
+        }
+
+
+        // --- Simple Ambience Player Function (Ensures Mixer controls stop it) ---
+        function stopAmbience() {
+            const ambienceAudio = document.getElementById('ambience-audio');
+            if (!ambienceAudio.paused) {
+                ambienceAudio.pause();
+            }
+        }
+
+
+        // --- Hero Fade-in ---
+        document.addEventListener("DOMContentLoaded", function () {
+            const heroContent = document.querySelector('.hero-content');
+            setTimeout(() => {
+                heroContent.style.opacity = 1;
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

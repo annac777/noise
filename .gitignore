@@ -1,6 +1,3 @@
-*.csv
-*.sas7bdat
+noise_20251209.csv
 .DS_Store
 __pycache__/
-*.pdf
-
